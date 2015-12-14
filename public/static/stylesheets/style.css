@@ -1,0 +1,68 @@
+body {
+  padding: 25;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#container {
+    margin: 50px auto;
+    width: 450px;
+    height: 500px;
+}
+
+.title {
+    text-align: center;
+}
+
+.row {
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.button {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    background: #F8F8F8;
+    border: solid 1px black;
+    float: left;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.button:hover {
+    background: #E0E0E0;
+}
+
+.button > img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 75px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.ink {
+    display: block;
+    position: absolute;
+    background: #b8b8b8;
+    opacity: .8;
+    border-radius: 100%;
+    transform: scale(0);
+}
+
+.ink.animate {
+    animation: ripple 0.65s linear;
+} @keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
