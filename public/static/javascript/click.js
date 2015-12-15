@@ -1,15 +1,11 @@
 var parent, ink, d, x, y;
-
-console.log("hi");
+var lights_hidden = true;
 
 $(".button").click(function(e) {
     parent = $(this).parent();
-    if (parent.find(".ink").length == 0) {
-        $(this).append("<span class='ink'></span>");
-    } else {
-        $(".ink").remove();
-        $(this).append("<span class='ink'></span>");
-    }
+
+    $(".ink").remove();
+    $(this).append("<span class='ink'></span>");
 
     ink = $(this).find(".ink");
 
@@ -17,11 +13,19 @@ $(".button").click(function(e) {
 
     if (!ink.height() && !ink.width()) {
         d = Math.max(parent.outerWidth(), parent.outerHeight());
-        ink.css({height: d, width: d});
+        ink.css({ height: d, width: d });
     }
 
     x = e.pageX - $(this).offset().left - ink.width() / 2;
     y = e.pageY - $(this).offset().top - ink.height() / 2;
 
-    ink.css({top: y + 'px', left: x + 'px'}).addClass("animate");
+    ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
+
+    var id = $(this).attr("id");
+
+    var xhttp = $.ajax("commands.php/?command=" + id)
+        .done(function() {
+            $("#info").text(xhttp.responseText);
+        });
 })
+
