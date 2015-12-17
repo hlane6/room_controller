@@ -29,3 +29,30 @@ $(".button").click(function(e) {
         });
 })
 
+$("#user_command").keydown(function(e) {
+    if (e.which == 13) {
+        var command = $("#user_command").val();
+        $("#user_command").val("");
+
+        var bpm = /bpm (\d+)/.exec(command);
+        var stop = /bpm stop/.exec(command);
+
+        if (bpm) {
+            var duration = 60.0 / parseInt(bpm[1]) * 2;
+            $("#info").text("setting bpm");
+
+            $("body").addClass("body-animation");
+            $("body").css({ "animation-duration": duration + "s" });
+        } else if (stop) {
+            $("#info").text("stop");
+            $("body").removeClass("body-animation");
+        }else {
+            var xhttp = $.ajax("commands.php/?command=" + command)
+                .done(function() {
+                    $("#info").text(xhttp.responseText);
+                });
+        }
+    }
+})
+
+

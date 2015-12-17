@@ -1,5 +1,5 @@
-<?php
+<?php 
 
-include 'templates/home.html';
+include "templates/home.html";
 
 ?>

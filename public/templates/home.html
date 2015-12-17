@@ -12,8 +12,6 @@
 </head>
 <body>
     <div id="container">
-        <h1 class="title">My Web App</h1>
-
         <div class="row">
             <div id="lights" class="button">
                 <img src="static/images/glyphicons-65-lightbulb.png" />
@@ -21,9 +19,16 @@
             <div id="tv" class="button">
                 <img src="static/images/glyphicons-87-display.png" />
             </div>
-            <div id="" class="button">
+            <div id="white" class="button">
+                <div class="white circle"></div>
             </div>
-            <div id="" class="button">
+        </div>
+        <div class="row">
+            <div id="strobe" class="strobe button">
+            </div>
+            <div id="fade" class=" fade button">
+            </div>
+            <div id="bpm" class="bpm button">
             </div>
         </div>
         <div class="row">
@@ -36,9 +41,6 @@
             <div id="blue" class="button">
                 <div class="blue circle"></div>
             </div>
-            <div id="white" class="button">
-                <div class="white circle"></div>
-            </div>
         </div>
         <div class="row">
             <div id="dark-red" class="button">
@@ -50,22 +52,16 @@
             <div id="light-blue" class="button">
                 <div class="light-blue circle"></div>
             </div>
-            <div id="strobe" class="button">
-                <p>strobe</p>
-            </div>
         </div>
         <div class="row">
             <div id="darkest-red" class="button">
                 <div class="darkest-red circle"></div>
             </div>
-            <div id="lighest-green" class="button">
+            <div id="lightest-green" class="button">
                 <div class="lightest-green circle"></div>
             </div>
             <div id="dark-blue" class="button">
                 <div class="dark-blue circle"></div>
-            </div>
-            <div id="fade" class="button">
-                <p>fade</p>
             </div>
         </div>
         <div class="row">
@@ -78,9 +74,6 @@
             <div id="purple" class="button">
                 <div class="purple circle"></div>
             </div>
-            <div id="bpm" class="button">
-                <p>bpm</p>
-            </div>
         </div>
         <div class="row">
             <div id="yellow" class="button">
@@ -92,9 +85,8 @@
             <div id="pink" class="button">
                 <div class="pink circle"></div>
             </div>
-            <div id="" class="button">
-            </div>
         </div>
+        <input id="user_command" type="text" />
         <p id="info">Information about commands will go down here!</p>
     </div>
     <script src="static/javascript/click.js"></script>
