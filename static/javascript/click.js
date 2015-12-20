@@ -61,6 +61,9 @@ $("#user_command").keydown(function(e) {
 
 $("#bpm").click(function (e) {
     times.push(new Date().getTime());
+    if (!start) {
+        start = new Date().getTime();
+    }
 
     $("body").removeClass();
     $("body").addClass(get_random_color());
@@ -70,5 +73,7 @@ $("#bpm").click(function (e) {
         timeout = null;
     }
 
-    timeout = setTimeout(find_bpm, 1000);
+    update_bpm();
+
+    timeout = setTimeout(set_bpm, 1000);
 })
