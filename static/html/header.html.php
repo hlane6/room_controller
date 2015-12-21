@@ -7,7 +7,7 @@
         A Simple Web App
     </title>
     <link rel="stylesheet" type="text/css"
-            href="static/stylesheets/style.css"/>
-    <script src="includes/jquery.js"></script>
+            href="/static/stylesheets/style.css"/>
+    <script src="/includes/jquery.js"></script>
 </head>
 <body>

@@ -60,7 +60,6 @@ $("#user_command").keydown(function(e) {
 })
 
 $("#bpm").click(function (e) {
-    times.push(new Date().getTime());
     if (!start) {
         start = new Date().getTime();
     }
