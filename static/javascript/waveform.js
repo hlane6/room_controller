@@ -35,7 +35,7 @@ function updateAnalysers(time) {
     var multiplier = analyserNode.frequencyBinCount / numBars;
     var right_side = [], left_side = [];
 
-    for (var i = 0; i < numBars; i += 2) {
+    for (var i = 0; i < numBars / 2; i += 2) {
         var magnitude = 0;
         var offset = Math.floor(i * multiplier);
 
@@ -53,6 +53,9 @@ function updateAnalysers(time) {
         var x2 = (RADIUS + magnitude / 3) * Math.cos(angle2) + (canvasWidth / 2);
         var y2 = (RADIUS + magnitude / 3) * Math.sin(angle2) + (canvasHeight / 2);
 
+        //x = i * SPACING * 2;
+        //y = canvasHeight / 2 - magnitude;
+
         right_side.push(x);
         right_side.push(y);
 
@@ -61,6 +64,7 @@ function updateAnalysers(time) {
     }
 
     drawCurve(analyserContext, right_side);
+    drawCurve(analyserContext, left_side);
 
 
     rafID = window.requestAnimationFrame(updateAnalysers);
@@ -75,7 +79,10 @@ function gotStream(stream) {
     audioInput.connect(inputPoint);
 
     analyserNode = audioContext.createAnalyser();
-    analyserNode.fftSize = 2048;
+
+    analyserNode.minDecibels = -90;
+    analyserNode.maxDecibels = 0;
+
     inputPoint.connect(analyserNode);
 
     zeroGain = audioContext.createGain();
