@@ -22,6 +22,7 @@ function updateAnalysers(time) {
 
     var SPACING = 5;
     var BAR_WIDTH = 3;
+    var RADIUS = 125;
     var numBars = Math.round(canvasWidth / SPACING);
     var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
@@ -31,30 +32,35 @@ function updateAnalysers(time) {
     analyserContext.fillStyle = "#F6D565";
     analyserContext.lineCap = "round";
 
-    analyserContext.beginPath();
-    analyserContext.moveTo(0, canvasHeight / 2);
-    analyserContext.lineTo(canvasWidth, canvasHeight / 2);
-    analyserContext.strokeStyle = 'white';
-    analyserContext.stroke();
-    analyserContext.closePath();
-
     var multiplier = analyserNode.frequencyBinCount / numBars;
-    var control_points = [];
+    var right_side = [], left_side = [];
 
-    for (var i = 0; i < numBars; i++) {
+    for (var i = 0; i < numBars; i += 2) {
         var magnitude = 0;
         var offset = Math.floor(i * multiplier);
+
         for (var j = 0; j < multiplier; j++)
             magnitude += freqByteData[offset + j];
+
         magnitude = magnitude / multiplier;
 
-        var magnitude2 = freqByteData[i * multiplier];
+        var angle = (3 * Math.PI / 2) + (i / numBars) * (2 * Math.PI);
+        var angle2 = (3 * Math.PI / 2) - (i / numBars) * (2 * Math.PI);
 
-        control_points.push(i * SPACING);
-        control_points.push(canvasHeight - magnitude);
+        var x = (RADIUS + magnitude / 3) * Math.cos(angle) + (canvasWidth / 2);
+        var y = (RADIUS + magnitude / 3) * Math.sin(angle) + (canvasHeight / 2);
+
+        var x2 = (RADIUS + magnitude / 3) * Math.cos(angle2) + (canvasWidth / 2);
+        var y2 = (RADIUS + magnitude / 3) * Math.sin(angle2) + (canvasHeight / 2);
+
+        right_side.push(x);
+        right_side.push(y);
+
+        left_side.push(x2);
+        left_side.push(y2);
     }
 
-    drawCurve(analyserContext, control_points, 1);
+    drawCurve(analyserContext, right_side);
 
 
     rafID = window.requestAnimationFrame(updateAnalysers);
