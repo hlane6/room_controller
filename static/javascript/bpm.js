@@ -20,11 +20,8 @@ var get_random_color = function() {
 }
 
 var change_background = function(duration) {
-    var color = get_random_color();
-
     $("body").removeClass();
-    $("body").addClass(color);
-
+    $("body").addClass(get_random_color());
     timeout = setTimeout(change_background, duration * 1000, duration);
 }
 

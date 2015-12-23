@@ -12,6 +12,11 @@ var canvasWidth, canvasHeight;
 
 var recIndex = 0;
 
+var energies = [];
+var current_energy, average_energy;
+var bass, mid, high;
+var recent = false;
+
 function updateAnalysers(time) {
     if (!analyserContext) {
         var canvas = document.getElementById("analyser");
@@ -35,7 +40,9 @@ function updateAnalysers(time) {
     var multiplier = analyserNode.frequencyBinCount / numBars;
     var right_side = [], left_side = [];
 
-    for (var i = 0; i < numBars / 2; i += 2) {
+    bass = 0;
+
+    for (var i = 0; i < numBars / 2; i += 1) {
         var magnitude = 0;
         var offset = Math.floor(i * multiplier);
 
@@ -47,25 +54,38 @@ function updateAnalysers(time) {
         var angle = (3 * Math.PI / 2) + (i / numBars) * (2 * Math.PI);
         var angle2 = (3 * Math.PI / 2) - (i / numBars) * (2 * Math.PI);
 
-        var x = (RADIUS + magnitude / 3) * Math.cos(angle) + (canvasWidth / 2);
-        var y = (RADIUS + magnitude / 3) * Math.sin(angle) + (canvasHeight / 2);
+        right_side.push((RADIUS + magnitude / 3) * Math.cos(angle) + (canvasWidth / 2));
+        right_side.push((RADIUS + magnitude / 3) * Math.sin(angle) + (canvasHeight / 2));
 
-        var x2 = (RADIUS + magnitude / 3) * Math.cos(angle2) + (canvasWidth / 2);
-        var y2 = (RADIUS + magnitude / 3) * Math.sin(angle2) + (canvasHeight / 2);
+        left_side.push((RADIUS + magnitude / 3) * Math.cos(angle2) + (canvasWidth / 2));
+        left_side.push((RADIUS + magnitude / 3) * Math.sin(angle2) + (canvasHeight / 2));
 
-        //x = i * SPACING * 2;
-        //y = canvasHeight / 2 - magnitude;
-
-        right_side.push(x);
-        right_side.push(y);
-
-        left_side.push(x2);
-        left_side.push(y2);
+        if (i < 12) {
+            bass += magnitude;
+        }
     }
 
     drawCurve(analyserContext, right_side);
     drawCurve(analyserContext, left_side);
 
+    energies.push(bass);
+
+    if (energies.length > 50)
+        energies.splice(0, 1);
+    average_energy = energies.reduce((a, b) => a + b) / energies.length;
+
+    if (!recent && (bass > 75) && (bass > average_energy * 1.15)) {
+        $("body").removeClass();
+        $("body").addClass(get_random_color());
+        recent = true;
+        timeout = setTimeout(function() { recent = false; timeout = null; }, 400);
+    }
+
+    var feedbackContext = document.getElementById("feedback").getContext("2d");
+    feedbackContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    drawHLine(feedbackContext, bass / 1000 * canvasHeight, "white");
+    drawHLine(feedbackContext, average_energy / 1000 * canvasHeight, "red");
 
     rafID = window.requestAnimationFrame(updateAnalysers);
 }
@@ -80,8 +100,8 @@ function gotStream(stream) {
 
     analyserNode = audioContext.createAnalyser();
 
-    analyserNode.minDecibels = -90;
-    analyserNode.maxDecibels = 0;
+    analyserNode.minDecibels = -80;
+    analyserNode.maxDecibels = 100;
 
     inputPoint.connect(analyserNode);
 

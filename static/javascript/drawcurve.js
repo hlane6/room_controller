@@ -75,3 +75,13 @@ function drawLines(ctx, pts) {
     for (i = 2; i < pts.length - 1; i += 2)
         ctx.lineTo(pts[i], pts[i + 1]);
 }
+
+function drawHLine(ctx, height, color) {
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, canvasHeight - height);
+    ctx.lineTo(canvasWidth, canvasHeight - height);
+    ctx.closePath();
+    ctx.stroke();
+
+}
