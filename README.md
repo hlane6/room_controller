@@ -1,6 +1,11 @@
-An Automatic Party Room
------------------------
+A Simple Web App
+----------------
 
-This was my attempt to create a sort of home automation system to
-automatically change the color of lights in my room based on the
-bass of the music currently playing.
+This is an attempt to create a system that can hear and react to music
+playing on the fly. It also doubles as a web app which can when properly
+configured can send / receive IR signals to act as a universal remote of
+sorts.
+
+###The Lights Are A Changing
+
+###With Great Power Comes Great Fun
