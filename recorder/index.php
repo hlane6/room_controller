@@ -1,5 +1,13 @@
-<?php
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/static/html/header.html.php'; ?>
 
-include $_SERVER['DOCUMENT_ROOT'] . '/templates/recorder.html.php'
+    <div id="viz">
+        <canvas id="analyser" height="500" width="1024"></canvas>
+        <canvas id="feedback" height="500" width="1024"></canvas>
+    </div>
 
-?>
+<script src="/static/javascript/bpm.js"></script>
+<script src="/static/javascript/drawcurve.js"></script>
+<script src="/static/javascript/waveform.js"></script>
+
+</body>
+</html>

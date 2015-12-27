@@ -22,6 +22,9 @@ music.
 
 The main purpose of this was to change lights based on the beat of music,
 much like how lights in a club will operate. It achieves this by listening
-to nearby sounds and isolating the sub-bass frequencies. If there is a 
+to nearby sounds and isolating the sub-bass frequencies. If there is a
 significant positive change in the total energy of those frequencies, the
-lights will change.
+lights will change. This method works well for genres of music that have
+pronounced sub-bass lines. EDM, Hip-Hop, and Rap will generally fit that
+description pretty well and thus the method works fairly well for those
+genres of music.
