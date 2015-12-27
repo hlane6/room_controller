@@ -42,9 +42,9 @@ function dance(time) {
     dy  = (points[points.length - 1] - points[0]) / points.length;
 
     if (!recent && (dy > 4)) {
-        console.log(dy);
+        var color = get_random_color();
         $("body").removeClass();
-        $("body").addClass(get_random_color());
+        $("body").addClass(color);
         recent = true;
         timeout = setTimeout(function() { recent = false; timeout = null; }, 400);
     }
@@ -106,6 +106,7 @@ function initAudio() {
 }
 
 $("#lights").click(function () {
+    $("body").removeClass("lights");
    initAudio(); 
 })
 
