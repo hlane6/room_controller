@@ -6,7 +6,7 @@ remote control for the LED light strip in my room. One of its functions
 is an attempt to change the color of light based upon the beat of music
 playing in the background.
 
-##TODO
+#####TODO
 + Train a neural network to recognize beats (much later on)
 
 ###Basic Setup
