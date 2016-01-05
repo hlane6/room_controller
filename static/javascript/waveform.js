@@ -52,7 +52,6 @@ function updateAnalysers(time) {
 
         magnitude = magnitude / multiplier;
 
-        /*
         var angle = (3 * Math.PI / 2) + (i / numBars) * (2 * Math.PI);
         var angle2 = (3 * Math.PI / 2) - (i / numBars) * (2 * Math.PI);
 
@@ -61,15 +60,14 @@ function updateAnalysers(time) {
 
         left_side.push((RADIUS + magnitude / 2) * Math.cos(angle2) + (canvasWidth / 2));
         left_side.push((RADIUS + magnitude / 2) * Math.sin(angle2) + (canvasHeight / 2));
-        */
 
         if (i < 1) {
             bass += magnitude;
         }
     }
 
-    //drawCurve(analyserContext, right_side);
-    //drawCurve(analyserContext, left_side);
+    drawCurve(analyserContext, right_side);
+    drawCurve(analyserContext, left_side);
 
     points.push(bass);
     if (points.length > 5)

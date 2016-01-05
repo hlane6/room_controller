@@ -66,7 +66,7 @@ function gotStream(stream) {
 
     analyserNode = audioContext.createAnalyser();
 
-    analyserNode.minDecibels = -100;
+    analyserNode.minDecibels = -80;
     analyserNode.maxDecibels = 100;
 
     inputPoint.connect(analyserNode);
