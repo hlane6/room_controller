@@ -13,7 +13,7 @@ def dance(length, data):
 
     fourier = numpy.fft.fft(data) / length    # apply fft and normalize
     fourier = abs(fourier[range(length / 4)])
-     
+
     for i in range(3):
         bass += fourier.real[i]
 

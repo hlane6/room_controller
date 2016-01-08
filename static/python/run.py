@@ -20,7 +20,7 @@ if __name__ == '__main__':
     while True:
         length, data = audio.inp.read()
         a = numpy.fromstring(data, dtype='int16')
-    
+
         if not recent:
             if dance(length, a):
                 timeout = 0
